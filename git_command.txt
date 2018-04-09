@@ -35,5 +35,23 @@
 	穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
 
 	要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+	一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用rm命令删了：
+	$ rm test.txt
+	这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，git status命令会立刻告诉你哪些文件被删除了：
+	现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令git rm删掉，并且git commit：
+		$ git rm test.txt
+		rm 'test.txt'
+		$ git commit -m "remove test.txt"
+		[master d17efd8] remove test.txt
+		 1 file changed, 1 deletion(-)
+		 delete mode 100644 test.txt
+	现在，文件就从版本库中被删除了。
+
+	另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：
+
+	$ git checkout -- test.txt
+	git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+
+
 
 
